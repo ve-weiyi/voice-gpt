@@ -1,15 +1,15 @@
 import os
 import azure.cognitiveservices.speech as speechsdk
 
+import config
+
 # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
-print('SPEECH_KEY', os.environ.get('SPEECH_KEY'))
-print('SPEECH_REGION', os.environ.get('SPEECH_REGION'))
-speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'),
-                                       region=os.environ.get('SPEECH_REGION'))
+speech_config = speechsdk.SpeechConfig(subscription=config.speech_key, region=config.speech_region)
 # speech_config.speech_recognition_language = "en-US"
 speech_config.speech_recognition_language = "zh-CN"
 
 
+# 使用麦克风读取语音
 def recognize_from_microphone():
     audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
@@ -32,8 +32,7 @@ def recognize_from_microphone():
     return speech_recognition_result
 
 
-# print("--->",recognize_from_microphone())
-
+# 使用文件中的语言
 def recognize_from_wavfile(file):
     audio_config = speechsdk.audio.AudioConfig(filename=file)
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
