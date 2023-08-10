@@ -50,10 +50,10 @@ func (h *HttpBuilder) DoRequest(method string) (string, error) {
 		log.Println(err)
 	}
 
-	if method == "POST" || method == "PUT" {
-		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-		req.Header.Set("Accept-Charset", "UTF-8")
-	}
+	//if method == "POST" || method == "PUT" {
+	//	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	//	req.Header.Set("Accept-Charset", "UTF-8")
+	//}
 	// 设置请求头
 	for k, v := range headers {
 		req.Header.Set(k, v)

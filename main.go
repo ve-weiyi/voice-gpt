@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 
 	"voice-gpt/chatgpt"
+	"voice-gpt/utils/jsonconv"
 )
 
 func main() {
@@ -19,6 +22,8 @@ func main() {
 			c.AbortWithStatusJSON(400, gin.H{})
 			return
 		}
+
+		fmt.Println("data:", jsonconv.ObjectToJsonIndent(req))
 
 		data, err := chatgpt.NewAIChatGPT().Chat(req)
 		if err != nil {

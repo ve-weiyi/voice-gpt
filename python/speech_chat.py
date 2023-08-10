@@ -44,7 +44,7 @@ def voice(msgs):
     voice(msgs)
 
 # 附带上下文的问答
-voice([])
+# voice([])
 # print("data:", data)
 # print("data 1:", data['choices'])
 # print("data 2:", data['choices'][0])

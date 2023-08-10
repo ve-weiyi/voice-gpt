@@ -1,6 +1,6 @@
+import io
 import os
 import azure.cognitiveservices.speech as speechsdk
-
 
 
 def synthesize_text_to_speech(text):
@@ -9,12 +9,16 @@ def synthesize_text_to_speech(text):
     print('SPEECH_REGION', os.environ.get('SPEECH_REGION'))
     speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'),
                                            region=os.environ.get('SPEECH_REGION'))
-    audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
-
-    # The language of the voice that speaks.
-
+    # 设置语音合成语言和声音
+    # speech_config.speech_synthesis_language = "en-US"
     # speech_config.speech_synthesis_voice_name = 'en-US-JennyNeural'
     speech_config.speech_synthesis_voice_name = 'zh-CN-YunxiNeural'
+    # 将语音输出到麦克风
+    # audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
+    audio_config = speechsdk.audio.AudioOutputConfig(filename='./output.wav')
+    # 创建一个内存字节流作为输出流
+    # output_stream = io.BytesIO()
+    # audio_config = speechsdk.audio.AudioOutputConfig(stream=speechsdk.audio.AudioOutputStream(handle=output_stream))
     # 创建语音合成器
     speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
 
@@ -34,13 +38,7 @@ def synthesize_text_to_speech(text):
     except Exception as e:
         print("Error:", str(e))
 
-
 # 调用函数并传入要转换为语音的文本
 # print("Enter some text that you want to speak >")
 # text = input()
 # synthesize_text_to_speech(text)
-
-
-
-
-
