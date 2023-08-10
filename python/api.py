@@ -23,8 +23,9 @@ def upload_file():
     # 检查文件扩展名是否为 .wav
     if file and file.filename.endswith('.wav'):
         # 将文件保存到指定路径
-        # file.save(os.path.join('uploads', file.filename))
-        print(file.filename)
+        print("filename", file.filename)
+        file.save(os.path.join(file.filename))
+        # 只能读取本地文件
         text = recognize_from_wavfile(file.filename).text
         print("input", text)
         msgs = []
