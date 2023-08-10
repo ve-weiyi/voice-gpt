@@ -30,35 +30,3 @@ def chatGptApi(msg):
     print("gpt response:", response.json())
     return response.json()
 
-
-def voice(msgs):
-    # 读取语言转文字
-    text = recognize_from_microphone().text
-    print("input:", text)
-
-    # 添加本次提问的消息
-    msgs.append(
-        {
-            "role": "user",
-            "content": text
-        }
-    )
-    # 文字转语音
-    data = chatGptApi(msgs)
-    choices = data['choices']
-
-    synthesize_text_to_speech(choices[0]['message']['content'])
-    time.sleep(1)
-    # 添加gpt回答的消息
-    msgs.append(choices[0]['message'])
-
-    # 递归调用 voice()，传入新的 msgs 列表
-    voice(msgs)
-
-# 附带上下文的问答
-# voice([])
-# print("data:", data)
-# print("data 1:", data['choices'])
-# print("data 2:", data['choices'][0])
-# print("data 3:", data['choices'][0]['message'])
-# print("data 3:", data['choices'][0]['message']['content'])
